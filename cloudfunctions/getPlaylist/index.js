@@ -7,35 +7,35 @@ cloud.init({
   traceUser: true, // wp:访问过小程序的用户被云开发控制台记住
 })
 
-const URL = 'http://39.100.192.160:3000/personalized'
-// const URL = 'http://music.lengband.wang/api/personalized'
+const URL = 'http://musicapi.lengband.wang/personalized'
 
 const db = cloud.database()
 
 const playlistCollection = db.collection('playlist')
-// const MAX_LIMIT = 100
+const MAX_LIMIT = 100
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const list = await playlistCollection.get()
-  // const countResult = await playlistCollection.count()
-  // const total = countResult.total
-  // const batchTimes = Math.ceil(total / MAX_LIMIT)
-  // const tasks = []
-  // for (let i = 0; i < batchTimes.length; i++) {
-  //   const promise = playlistCollection.skip(i * MAX_LIMIT).limit(MAX_LIMIT).get()
-  //   tasks.push(promise)
-  // }
-  // let list = {
-  //   data: []
-  // }
-  // if (tasks.length > 0) {
-  //   await (await Promise.all(tasks)).reduce((acc, cur) => {
-  //     return {
-  //       data: acc.data.concat(cur.data)
-  //     }
-  //   })
-  // }
+  // const list = await playlistCollection.get() // 云函数中最多可以调用100条数据
+  const countResult = await playlistCollection.count()
+  const total = countResult.total
+  const batchTimes = Math.ceil(total / MAX_LIMIT)
+  const tasks = []
+  for (let i = 0; i < batchTimes; i++) {
+    const promise = playlistCollection.skip(i * MAX_LIMIT).limit(MAX_LIMIT).get()
+    tasks.push(promise)
+  }
+  let list = {
+    data: []
+  }
+  if (tasks.length > 0) {
+    const t = await (await Promise.all(tasks))
+    list = t.reduce((acc, cur) => {
+      return {
+        data: acc.data.concat(cur.data)
+      }
+    })
+  }
   const playlist = await rp(URL).then(res => {
     return JSON.parse(res).result
   }).catch(err => {
@@ -45,8 +45,8 @@ exports.main = async (event, context) => {
   const newData = []
   for (let i = 0; i < playlist.length; i++) {
     let flag = true
-    for (let j = 0; j < list.length; j++) {
-      if (playlist[i].id === list[j].id) {
+    for (let j = 0; j < list.data.length; j++) {
+      if (playlist[i].id === list.data[j].id) {
         flag = false
         break
       }

@@ -3,8 +3,8 @@ const cloud = require('wx-server-sdk')
 const TcbRouter = require('tcb-router')
 const rp = require('request-promise')
 
-const BASE_URL = 'http://39.100.192.160:3000'
-// const BASE_URL = 'http://music.lengband.wang/api'
+// const BASE_URL = 'http://39.100.192.160:3000'
+const BASE_URL = 'http://musicapi.lengband.wang'
 
 cloud.init()
 
