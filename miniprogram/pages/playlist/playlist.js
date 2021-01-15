@@ -86,6 +86,7 @@ Page({
     wx.cloud.callFunction({
       name: 'music',
       data: {
+        $url: 'playlist',
         start: this.data.playlist.length,
         count: MAX_LIMIT
       }
