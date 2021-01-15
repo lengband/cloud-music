@@ -11,3 +11,5 @@
     <playlist-item playlist="{{item}}" />
   </block>
 </view>
+
+<view class="no-more-data" wx:if="{{notMoreData}}">没有更多数据了</view>

@@ -10,3 +10,9 @@
   width: 100%;
   height: 100%;
 }
+
+.no-more-data {
+  margin: 0 auto 20rpx;
+  font-size: 24rpx;
+  color: #888;
+}

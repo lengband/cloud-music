@@ -18,7 +18,8 @@ Page({
         url: 'http://p1.music.126.net/Yo-FjrJTQ9clkDkuUCTtUg==/109951164169441928.jpg',
       }
     ],
-    playlist: []
+    playlist: [],
+    notMoreData: false
   },
 
   /**
@@ -61,7 +62,8 @@ Page({
    */
   onPullDownRefresh: function () {
     this.setData({
-      playlist: []
+      playlist: [],
+      notMoreData: false
     })
     this._getPlaylist()
   },
@@ -70,7 +72,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this._getPlaylist()
+    if (!this.data.notMoreData) {
+      this._getPlaylist()
+    }
   },
 
   /**
@@ -91,9 +95,15 @@ Page({
         count: MAX_LIMIT
       }
     }).then(({ result }) => {
-      this.setData({
-        playlist: this.data.playlist.concat(result.data)
-      })
+      if (result.data && result.data.length) {
+        this.setData({
+          playlist: this.data.playlist.concat(result.data)
+        })
+      } else {
+        this.setData({
+          notMoreData: true
+        })
+      }
       wx.stopPullDownRefresh()
       wx.hideLoading()
     })
