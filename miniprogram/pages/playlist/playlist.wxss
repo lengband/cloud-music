@@ -15,4 +15,5 @@
   margin: 0 auto 20rpx;
   font-size: 24rpx;
   color: #888;
+  text-align: center;
 }

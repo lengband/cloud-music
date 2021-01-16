@@ -53,6 +53,7 @@ exports.main = async (event, context) => {
     }
     if (flag) newData.push(playlist[i])
   }
+  console.log({ listData: list.data, playlist, newData });
   for (let i = 0; i < newData.length; i++) {
     await playlistCollection.add({
       data: {

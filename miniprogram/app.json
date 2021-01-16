@@ -16,7 +16,7 @@
   },
   "tabBar": {
     "color": "#474747",
-    "selectedColor": "#d43c43",
+    "selectedColor": "#d43c33",
     "list": [
       {
         "pagePath": "pages/playlist/playlist",

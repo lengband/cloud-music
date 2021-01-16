@@ -1,11 +1,12 @@
 <view class="player-container" style="background: url({{picUrl}}) no-repeat center/cover"></view>
 <view class="player-mask"></view>
 <view class="player-info">
-  <view class="player-disc {{ isPlaying ? 'play' : '' }}">
+  <view class="player-disc {{ isPlaying ? 'play' : '' }}" hidden="{{isLyricShow}}" bindtap="onChangeLyricShow">
     <image class="player-img rotation {{ isPlaying ? '' : 'rotation-paused' }} " src="{{picUrl}}"></image>
   </view>
+  <lyric class="lyric" isLyricShow="{{!isLyricShow}}" bindtap="onChangeLyricShow" lyric="{{lyric}}" />
   <view class="progress-bar">
-    <process-bar-base bind:musicEnd="onNext" />
+    <process-bar-base bind:musicEnd="onNext" bind:timeUpdate="timeUpdate" bind:musicPlay="onPlay" bind:musicPause="onPause" isSame="{{isSame}}" />
   </view>
   <view class="control">
     <text class="iconfont icon-shangyishoushangyige" bindtap="onPrev"></text>

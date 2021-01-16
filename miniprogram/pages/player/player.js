@@ -4,6 +4,7 @@ let nowPlayingIndex = 0
 
 // 获取全局唯一的背景音频管理器
 const backgroundAudioManager = wx.getBackgroundAudioManager()
+const app = getApp()
 
 Page({
 
@@ -13,6 +14,9 @@ Page({
   data: {
     picUrl: '',
     isPlaying: false,
+    isLyricShow: false, // 当前歌词师范显示
+    lyric: '',
+    isSame: false, // 表示是否为同一首歌
   },
 
   /**
@@ -25,7 +29,12 @@ Page({
   },
 
   _loadMusicDetail (musicId) {
-    backgroundAudioManager.stop()
+    this.setData({
+      isSame: musicId == app.getPlayMusicId()
+    })
+    if (!this.data.isSame) {
+      backgroundAudioManager.stop()
+    }
     let music = musiclist[nowPlayingIndex]
     wx.setNavigationBarTitle({
       title: music.name,
@@ -34,6 +43,7 @@ Page({
       picUrl: music.al.picUrl,
       isPlaying: false
     })
+    app.setPlayMusicId(musicId)
     wx.showLoading({
       title: '歌曲加载中',
     })
@@ -45,15 +55,41 @@ Page({
       }
     }).then(res => {
       const result = JSON.parse(res.result)
-      backgroundAudioManager.src = result.data[0].url
-      backgroundAudioManager.title = music.name
-      backgroundAudioManager.coverImgUrl = music.al.picUrl
-      backgroundAudioManager.singer = music.ar[0].name
-      backgroundAudioManager.epname = music.al.name
+      if (result.data[0].url === null) {
+        wx.showToast({
+          title: '无权限播放',
+        })
+        return
+      }
+      if (!this.data.isSame) {
+        backgroundAudioManager.src = result.data[0].url
+        backgroundAudioManager.title = music.name
+        backgroundAudioManager.coverImgUrl = music.al.picUrl
+        backgroundAudioManager.singer = music.ar[0].name
+        backgroundAudioManager.epname = music.al.name
+      }
       this.setData({
         isPlaying: true
       })
       wx.hideLoading()
+      // 加载歌词
+      wx.cloud.callFunction({
+        name: 'music',
+        data: {
+          musicId,
+          $url: 'lyric',
+        }
+      }).then(res => {
+        console.log(res, 'rrr');
+        let lyric = '暂无歌词'
+        const lrc = JSON.parse(res.result).lrc
+        if (lrc) {
+          lyric = lrc.lyric
+        }
+        this.setData({
+          lyric
+        })
+      })
     })
   },
 
@@ -81,6 +117,28 @@ Page({
       nowPlayingIndex = 0
     }
     this._loadMusicDetail(musiclist[nowPlayingIndex].id)
+  },
+
+  onChangeLyricShow () {
+    this.setData({
+      isLyricShow: !this.data.isLyricShow
+    })
+  },
+
+  timeUpdate (e) {
+    this.selectComponent('.lyric').update(e.detail.currentTime)
+  },
+  
+  onPlay () {
+    this.setData({
+      isPlaying: true
+    })
+  },
+
+  onPause () {
+    this.setData({
+      isPlaying: false
+    })
   },
 
   /**
