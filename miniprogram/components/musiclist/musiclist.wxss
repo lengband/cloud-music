@@ -27,6 +27,13 @@
   color: #888;
 }
 
-.playing view, .playing text {
+.playing .musiclist-index,
+.playing .musiclist-alia,
+.playing .musiclist-singer,
+.playing .musiclist-name {
   color: #d43c33;
 }
+
+/* .playing .musiclist-alia {
+  color: #d43c33;
+} */
