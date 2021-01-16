@@ -4,10 +4,14 @@
   <view class="player-disc {{ isPlaying ? 'play' : '' }}">
     <image class="player-img rotation {{ isPlaying ? '' : 'rotation-paused' }} " src="{{picUrl}}"></image>
   </view>
+  <view class="progress-bar">
+    <process-bar-base bind:musicEnd="onNext" />
+  </view>
+  <view class="control">
+    <text class="iconfont icon-shangyishoushangyige" bindtap="onPrev"></text>
+    <text class="iconfont {{ !isPlaying ? 'icon-bofang1' : 'icon-zanting1' }}" bindtap="togglePlaying"></text>
+    <text class="iconfont icon-xiayigexiayishou" bindtap="onNext"></text>
+  </view>
 </view>
 
-<view class="control">
-  <text class="iconfont icon-shangyishoushangyige" bindtap="onPrev"></text>
-  <text class="iconfont {{ !isPlaying ? 'icon-bofang1' : 'icon-zanting1' }}" bindtap="togglePlaying"></text>
-  <text class="iconfont icon-xiayigexiayishou" bindtap="onNext"></text>
-</view>
+
