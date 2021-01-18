@@ -40,12 +40,6 @@
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
     "plugin": {
       "list": []
     },
@@ -68,6 +62,18 @@
           "name": "pages/musiclist/musiclist",
           "pathName": "pages/musiclist/musiclist",
           "query": "playlistId=5439844460",
+          "scene": null
+        },
+        {
+          "name": "pages/blog/blog",
+          "pathName": "pages/blog/blog",
+          "query": "playlistId=5439844460",
+          "scene": null
+        },
+        {
+          "name": "pages/blog-edit/blog-edit",
+          "pathName": "pages/blog-edit/blog-edit",
+          "query": "nickName=\"lengband丶\"&avatarUrl=\"https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoa…z8ykXznmTdeLNNLI5Is7rIZcMAsEjo523qT4Y9hF0mibg/132\"",
           "scene": null
         }
       ]
