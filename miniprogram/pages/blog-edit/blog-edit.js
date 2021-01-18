@@ -1,6 +1,10 @@
 const MAX_WORDS_NUM = 140 // 输入文字最大的个数
 const MAX_IMG_NUM = 9 // 最大上传图片数量
 
+const db = wx.cloud.database()
+let content = '' // 当前发布的文字内容
+let userInfo = {}
+
 Page({
 
   /**
@@ -18,6 +22,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(options, 'options');
+    userInfo = options
   },
 
   onInput (e) {
@@ -29,6 +34,7 @@ Page({
     this.setData({
       wordsNum
     })
+    content = e.detail.value
   },
 
   onFocus (e) {
@@ -78,6 +84,75 @@ Page({
     wx.previewImage({
       urls: this.data.images,
       current: e.target.dataset.imgsrc
+    })
+  },
+
+  send () {
+    // 数据库：内容、图片、fileID、openid(用户的唯一标识)、昵称、头像、时间
+    // 1、图片：云存储（会返回 fileID）
+    if (content.trim() === '') {
+      wx.showModal({
+        title: '请输入内容',
+        content: ''
+      })
+      return
+    }
+    wx.showLoading({
+      title: '发布中',
+      mask: true
+    })
+    const promiseArr = []
+    let fileIds = []
+    for (let i = 0; i < this.data.images.length; i++) {
+      let p = new Promise((resolve, reject) => {
+        const item = this.data.images[i];
+        let suffix = /\.\w+$/.exec(item)[0] // 文件扩展名
+        wx.cloud.uploadFile({
+          cloudPath: 'blog/' + Date.now() + '-' + Math.random() * 10000000 + suffix,
+          filePath: item,
+          success: res  => {
+            fileIds = fileIds.concat(res.fileID)
+            resolve()
+          },
+          fail: err => {
+            reject(err)
+          },
+        })
+      })
+      promiseArr.push(p)
+    }
+    // 2、数据 -> 云数据库
+    Promise.all(promiseArr).then(res => {
+      db.collection('blog').add({
+        data: {
+          ...userInfo,
+          content,
+          img: fileIds,
+          createTime: db.serverDate(),
+          // openid // 会默认上传字段
+        }
+      }).then(() => {
+        this._sendCallback()
+        // 返回blog页面，并刷新
+        wx.navigateBack()
+        const pages = getCurrentPages()
+        // 取到上一个页面
+        const prevPage = pages[pages.length - 2]
+        prevPage.onPullDownRefresh()
+      }).catch((err) => {
+        this._sendCallback('发布失败')
+      })
+    }).catch(err => {
+      this._sendCallback('发布失败')
+    })
+  },
+
+  _sendCallback (title = '发布成功') {
+    wx.hideLoading()
+    setTimeout(() => {
+      wx.showToast({
+        title,
+      })
     })
   },
 
