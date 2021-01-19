@@ -1,7 +1,7 @@
 <view class="container">
   <view class="header">
     <view class="publish-container" bindtap="onPublish">
-      <i class="iconfont icon-fabu"></i>
+      <i class="iconfont icon-edit"></i>
     </view>
     <view class="search-container">
       <search bind:search="onSearch" />
@@ -12,7 +12,7 @@
     <block wx:for="{{blogList}}" wx:key="_id">
       <view class="blog-panel">
         <blog-card blog="{{item}}" bindtap="goComment" data-blogid="{{item._id}}" />
-        <blog-ctrl iconfont="iconfont" icon-pinglun="icon-pinglun" icon-fenxiang="icon-fenxiang" />
+        <blog-ctrl iconfont="iconfont" blog="{{item}}" blogId="{{item._id}}" icon-pinglun="icon-pinglun" icon-fenxiang="icon-fenxiang" />
       </view>
     </block>
   </view>

@@ -75,6 +75,12 @@
           "pathName": "pages/blog-edit/blog-edit",
           "query": "nickName=\"lengband丶\"&avatarUrl=\"https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoa…z8ykXznmTdeLNNLI5Is7rIZcMAsEjo523qT4Y9hF0mibg/132\"",
           "scene": null
+        },
+        {
+          "name": "pages/blog-comment/blog-comment",
+          "pathName": "pages/blog-comment/blog-comment",
+          "query": "blogId=2424fa9860057a6b0225737313875aa8",
+          "scene": null
         }
       ]
     }

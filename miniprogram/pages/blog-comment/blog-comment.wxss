@@ -1,1 +1,55 @@
-/* pages/blog-comment/blog-comment.wxss */
+page {
+  background-color: #f1f1f1;
+}
+
+.blog-card {
+  margin-bottom: 20rpx;
+}
+
+.tab .tab-item {
+  font-size: 40rpx;
+  color: #939393;
+  background-color: #fff;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding-left: 20rpx;
+}
+
+.comment-list {
+  margin-bottom: 100rpx;
+}
+
+.comment-title {
+  display: flex;
+}
+
+.comment-portrait {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+
+.comment-time {
+  font-size: 24rpx;
+  color: #939393;
+}
+
+.comment-content {
+  margin: 20rpx 0rpx;
+}
+
+.comment {
+  border-top: 1px solid #f1f1f1;
+  background-color: #fff;
+  padding: 20rpx 20rpx;
+}
+
+.blog-ctrl {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80rpx;
+}

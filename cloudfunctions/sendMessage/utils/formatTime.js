@@ -16,4 +16,4 @@ const formatTime = (date = new Date()) => {
   return fmt
 }
 
-export default formatTime
+module.exports = formatTime

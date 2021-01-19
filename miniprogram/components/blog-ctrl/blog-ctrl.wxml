@@ -4,7 +4,28 @@
     <text>评论</text>
   </view>
   <view class="ctrl-item share">
-    <i class="iconfont icon-fenxiang icon"></i>
-    <text>分享</text>
+    <button open-type="share" data-blogid="{{blogId}}" data-blog="{{blog}}" class="share-btn" hover-class="share-hover">
+      <i class="iconfont icon-fenxiang icon"></i>
+      <text>分享</text>
+    </button>
   </view>
 </view>
+
+<login
+  modalShow="{{loginShow}}"
+  bind:loginsuccess="onLoginsuccess"
+  bind:loginfail="onLoginFail"
+/>
+
+<bottom-modal modalShow="{{modalShow}}">
+  <!-- <form slot="modal-content" report-submit="true" bindsubmit="onSend">
+    <textarea name="content" class="comment-content" value="{{content}}" placeholder="写评论" fixed="true" maxlength="300"></textarea>
+    <button class="send" form-type="submit">发送</button>
+  </form> -->
+  <view slot="modal-content">
+    <textarea name="content" class="comment-content" value="{{content}}" placeholder="写评论" fixed="true" maxlength="300" bindinput="onInput"></textarea>
+    <button class="send" bindtap="onSend">发送</button>
+  </view>
+</bottom-modal>
+
+

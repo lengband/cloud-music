@@ -9,9 +9,9 @@
     <process-bar-base bind:musicEnd="onNext" bind:timeUpdate="timeUpdate" bind:musicPlay="onPlay" bind:musicPause="onPause" isSame="{{isSame}}" />
   </view>
   <view class="control">
-    <text class="iconfont icon-shangyishoushangyige" bindtap="onPrev"></text>
-    <text class="iconfont {{ !isPlaying ? 'icon-bofang1' : 'icon-zanting1' }}" bindtap="togglePlaying"></text>
-    <text class="iconfont icon-xiayigexiayishou" bindtap="onNext"></text>
+    <text class="iconfont icon-shangyishou" bindtap="onPrev"></text>
+    <text class="iconfont {{ !isPlaying ? 'icon-bofang' : 'icon-zanting' }}" bindtap="togglePlaying"></text>
+    <text class="iconfont icon-xiayishou" bindtap="onNext"></text>
   </view>
 </view>
 

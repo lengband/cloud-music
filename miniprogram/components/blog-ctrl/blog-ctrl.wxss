@@ -27,3 +27,45 @@
 .ctrl-item text {
   font-size: 32rpx;
 }
+
+.comment-content {
+  text-align: left;
+  padding: 30rpx 0rpx 0 30rpx;
+}
+
+.send {
+  right: 20rpx;
+  position: absolute;
+  bottom: 20rpx;
+  background: #d43c33;
+  color: #fff;
+  font-size: 24rpx;
+  padding: 14rpx 16rpx;
+  width: 120rpx !important;
+}
+
+.share-btn {
+  background-color: #fff;
+  color: rgba(40, 47, 60, 0.8);
+  padding: 0;
+  height: 100%;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+}
+
+.share-btn text {
+  font-weight: 400;
+  color: rgba(40, 47, 60, 0.8);
+}
+
+.share-btn::after {
+  display: none;
+}
+
+.share-hover::after {
+  border: 0;
+}

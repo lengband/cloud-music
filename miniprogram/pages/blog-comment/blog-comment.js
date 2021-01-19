@@ -1,18 +1,44 @@
-// pages/blog-comment/blog-comment.js
+import formatTime from '../../utils/formatTime'
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    blog: {},
+    commentList: [],
+    blogId: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options, 'options');
+    this.setData({
+      blogId: options.blogId
+    })
+    this._getBlogDetail()
+  },
+
+  _getBlogDetail () {
+    wx.showLoading({
+      title: '加载中',
+      mask: true,
+    })
+    wx.cloud.callFunction({
+      name: 'blog',
+      data: {
+        blogId: this.data.blogId,
+        $url: 'detail',
+      }
+    }).then(({ result }) => {
+      this.setData({
+        blog: result.detail[0],
+        commentList: result.commentList.data.map(item => ({ ...item, createTime: formatTime(new Date(item.createTime)) }))
+      })
+      wx.hideLoading()
+    })
   },
 
   /**
@@ -61,6 +87,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    const blogObj = this.data.blog
+    return {
+      title: blogObj.content,
+      path: `/pages/blog-comment/blog-comment?blogId=${blogObj._id}`,
+      // imageUrl: 'cloud://test-lkp8f.7465-test-lkp8f-1257920176/blog/1610956952879-8278339.201870963.jpg'
+    }
   }
 })
