@@ -5,6 +5,7 @@
   align-items: center;
   background: #fff;
   height: 100%;
+  border-top: 1px solid #f1f1f1;
 }
 
 .ctrl-item {
@@ -17,6 +18,10 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.ctrl-item:first-child {
+  border-right: 1px solid #f1f1f1;
 }
 
 .ctrl-item .icon {

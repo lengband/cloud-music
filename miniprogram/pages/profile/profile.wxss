@@ -1,1 +1,55 @@
-/* pages/profile/profile.wxss */
+page {
+  background-color: #f1f1f1;
+}
+
+.profile-header {
+  /* background-image: url(https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg2.3lian.com%2Fimg2007%2F19%2F36%2F037.jpg&refer=http%3A%2F%2Fimg2.3lian.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1613648978&t=c99867084b7597e0456add3845cf6bf7); */
+  background-color: #d43c33;
+  background-size: cover;
+  height: 480rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  font-weight: 300;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.avatar-url {
+  width: 200rpx;
+  height: 200rpx;
+  display: block;
+  overflow: hidden;
+  border: 6rpx solid #fff;
+  border-radius: 50%;
+  margin-bottom: 20rpx;
+}
+
+.nav {
+  background-color: #fff;
+  width: 90%;
+  margin: 40rpx auto 0;
+  border-radius: 12rpx;
+}
+
+.nav-item {
+  padding: 24rpx;
+  border-bottom: 1px solid #f1f1f1;
+  position: relative;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.nav-item .text {
+  margin-left: 30rpx;
+}
+
+.nav-item .content i:nth-child(1) {
+  color: #d43c33;
+}
+
+.nav-item .text + .iconfont {
+  position: absolute;
+  right: 30rpx;
+}
+

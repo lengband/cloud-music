@@ -67,6 +67,8 @@ Page({
         backgroundAudioManager.coverImgUrl = music.al.picUrl
         backgroundAudioManager.singer = music.ar[0].name
         backgroundAudioManager.epname = music.al.name
+        // 保存播放历史
+        this.savePlayHistory()
       }
       this.setData({
         isPlaying: true
@@ -80,7 +82,6 @@ Page({
           $url: 'lyric',
         }
       }).then(res => {
-        console.log(res, 'rrr');
         let lyric = '暂无歌词'
         const lrc = JSON.parse(res.result).lrc
         if (lrc) {
@@ -139,6 +140,21 @@ Page({
     this.setData({
       isPlaying: false
     })
+  },
+
+  // 保持播放历史
+  savePlayHistory () {
+    // 当前正在播放的歌曲
+    const music = musiclist[nowPlayingIndex]
+    const openid = app.globalData.openid
+    const history = wx.getStorageSync(openid)
+    if (!history.find(item => item.id === music.id)) {
+      history.unshift(music)
+      wx.setStorage({
+        key: openid,
+        data: history
+      })
+    }
   },
 
   /**

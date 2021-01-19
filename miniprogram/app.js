@@ -12,10 +12,12 @@ App({
         env: 'test-lkp8f',
         traceUser: true, // wp:访问过小程序的用户被云开发控制台记住
       })
+      this.getOpenid()
     }
 
     this.globalData = {
       playingMusicId: -1,
+      openid: -1
     }
   },
   setPlayMusicId (musicId) {
@@ -24,4 +26,18 @@ App({
   getPlayMusicId () {
     return this.globalData.playingMusicId
   },
+  getOpenid () {
+    wx.cloud.callFunction({
+      name: 'login'
+    }).then(res => {
+      const openid = res.result.openid
+      this.globalData.openid = openid
+      if (!wx.getStorageSync(openid)) {
+        wx.setStorage({
+          data: [], // 历史播放记录
+          key: openid,
+        })
+      }
+    })
+  }
 })

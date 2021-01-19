@@ -81,6 +81,12 @@
           "pathName": "pages/blog-comment/blog-comment",
           "query": "blogId=2424fa9860057a6b0225737313875aa8",
           "scene": null
+        },
+        {
+          "name": "pages/profile/profile",
+          "pathName": "pages/profile/profile",
+          "query": "playlistId=5439844460",
+          "scene": null
         }
       ]
     }

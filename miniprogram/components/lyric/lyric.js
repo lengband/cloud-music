@@ -14,7 +14,6 @@ Component({
 
   observers: {
     lyric (lrc) {
-      console.log(lrc, 'lrc');
       if (lrc === '暂无歌词') {
         this.setData({
           lrcList: [{ lrc, time: 0 }],
@@ -54,7 +53,6 @@ Component({
     update (currentTime) {
       let lrcList = this.data.lrcList
       if (lrcList.length === 0) return
-      console.log(currentTime, lrcList[lrcList.length - 1].time);
       if (currentTime >= lrcList[lrcList.length - 1].time) {
         if (this.data.nowLyricIndex !== -1) {
           this.setData({

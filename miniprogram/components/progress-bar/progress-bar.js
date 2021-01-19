@@ -68,22 +68,22 @@ Component({
     },
     _bindBGMEvent () {
       backgroundAudioManager.onPlay(() => {
-        console.log('onPlay');
+        // console.log('onPlay');
         isMoving = false
         this.triggerEvent('musicPlay')
       })
       backgroundAudioManager.onStop(() => {
-        console.log('onStop');
+        // console.log('onStop');
       })
       backgroundAudioManager.onPause(() => {
-        console.log('onPause');
+        // console.log('onPause');
         this.triggerEvent('musicPause')
       })
       backgroundAudioManager.onWaiting(() => { // 拖拽到还未加载的歌曲部分
-        console.log('onWaiting');
+        // console.log('onWaiting');
       })
       backgroundAudioManager.onCanplay(() => {
-        console.log('onCanplay');
+        // console.log('onCanplay');
         if (backgroundAudioManager.duration === undefined) {
           setTimeout(() => {
             this._setTime()
@@ -93,7 +93,7 @@ Component({
         }
       })
       backgroundAudioManager.onTimeUpdate(() => {
-        console.log('onTimeUpdate');
+        // console.log('onTimeUpdate');
         if (!isMoving) {
           const currentTime = backgroundAudioManager.currentTime
           const duration = backgroundAudioManager.duration
