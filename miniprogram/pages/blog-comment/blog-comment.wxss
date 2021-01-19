@@ -53,3 +53,10 @@ page {
   right: 0;
   height: 80rpx;
 }
+
+.no-more-data {
+  margin: 60rpx auto 20rpx;
+  font-size: 34rpx;
+  color: #888;
+  text-align: center;
+}

@@ -32,6 +32,11 @@ Page({
       this.setData({
         blogList: this.data.blogList.concat(res.result)
       })
+      if (res.result.length === 0) {
+        wx.showToast({
+          title: '没有更多了...',
+        })
+      }
     })
   },
 

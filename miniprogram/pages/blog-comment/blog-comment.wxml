@@ -17,6 +17,7 @@
         <view class="comment-time">{{item.createTime}}</view>
       </view>
     </block>
+    <view class="no-more-data" wx:if="{{commentList.length === 0}}">暂无数据</view>
   </view>
   <view class="blog-ctrl">
     <blog-ctrl blogId="{{blog._id}}" bind:refreshCommentList="_getBlogDetail"></blog-ctrl>

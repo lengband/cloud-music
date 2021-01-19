@@ -65,6 +65,11 @@ Page({
       })
       wx.hideLoading()
       wx.stopPullDownRefresh()
+      if (result.length === 0) {
+        wx.showToast({
+          title: '没有更多了...',
+        })
+      }
     }).catch(() => {
       wx.hideLoading()
     })

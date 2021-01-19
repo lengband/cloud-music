@@ -6,6 +6,8 @@ cloud.init()
 
 const db = cloud.database()
 const blogCollection = db.collection('blog')
+const blogCommentCollection = db.collection('blog-comment')
+
 const MAX_LIMIT = 100
 
 // 云函数入口函数
@@ -85,5 +87,29 @@ exports.main = async (event, context) => {
     .get()
     .then(res => res.data)
   })
+
+  app.router('addBlogComment', async (ctx, next) => {
+    // 先获取 templateId 方便前端处理
+    const { result } = await cloud.callFunction({
+      name: 'sendMessage',
+      data: { $url: 'getBlogCommentTmpid' },
+    })
+    ctx.body = await blogCommentCollection
+      .add({
+        data: {
+          content: event.content,
+          createTime: db.serverDate(),
+          blogId: event.blogId,
+          nickName: event.nickName,
+          avatarUrl: event.avatarUrl
+        }
+      })
+      .then(() => {
+        return {
+          templateId: result.templateId
+        }
+      })
+  })
+
   return app.serve()
 }

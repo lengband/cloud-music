@@ -79,15 +79,17 @@ Component({
         title: '评论中',
         mask: true
       })
-      db.collection('blog-comment').add({
+      wx.cloud.callFunction({
+        name: 'blog',
         data: {
+          $url: 'addBlogComment',
           content,
-          createTime: db.serverDate(),
           blogId: this.properties.blogId,
           nickName: userInfo.nickName,
           avatarUrl: userInfo.avatarUrl
         }
-      }).then(res => {
+      })
+      .then((r) => {
         wx.hideLoading()
         this.setData({
           modalShow: false,
@@ -99,16 +101,16 @@ Component({
           title: '评论成功! \n（如希望在微信服务通知里面显示评论结果，请点击确定）',
           success: result => {
             if (result.cancel) return
-            // 推送模板消息
-            // !!! 这里的接口应该是云函数接口，并且 tmplIds 是有云函数返回的
+            // 推送模板消息，tmplIds 是由云函数返回的
             wx.requestSubscribeMessage({
-              tmplIds: ['NVPA42PC6d5SHGu55x3KqmZGmAa6tHlg9GyyfHIg9tU'],
+              tmplIds: [r.result.templateId],
               success: res => {
-                if (res['NVPA42PC6d5SHGu55x3KqmZGmAa6tHlg9GyyfHIg9tU'] === 'reject') return
+                if (res[r.result.templateId] === 'reject') return
                 wx.cloud.callFunction({
                   name: 'sendMessage',
                   data: {
                     content,
+                    $url: 'subscribeMessage',
                     blogId: this.properties.blogId
                   }
                 })
