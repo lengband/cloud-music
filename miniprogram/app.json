@@ -18,13 +18,13 @@
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#d43c33",
+    "navigationBarBackgroundColor": "#fd999a",
     "navigationBarTitleText": "冷板凳云音乐",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#474747",
-    "selectedColor": "#d43c33",
+    "selectedColor": "#fd999a",
     "list": [
       {
         "pagePath": "pages/playlist/playlist",

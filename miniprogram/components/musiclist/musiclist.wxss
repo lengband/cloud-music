@@ -31,5 +31,5 @@
 .playing .musiclist-alia,
 .playing .musiclist-singer,
 .playing .musiclist-name {
-  color: #d43c33;
+  color: #fd999a;
 }

@@ -42,7 +42,7 @@
   right: 20rpx;
   position: absolute;
   bottom: 20rpx;
-  background: #d43c33;
+  background: #fd999a;
   color: #fff;
   font-size: 24rpx;
   padding: 14rpx 16rpx;

@@ -28,7 +28,7 @@
 }
 
 .send-btn {
-  background-color: #d43c33;
+  background-color: #fd999a;
   color: #fff;
   font-size: 24rpx !important;
   margin-right: 20rpx;

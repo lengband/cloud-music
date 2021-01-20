@@ -4,7 +4,7 @@ page {
 
 .profile-header {
   /* background-image: url(https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg2.3lian.com%2Fimg2007%2F19%2F36%2F037.jpg&refer=http%3A%2F%2Fimg2.3lian.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1613648978&t=c99867084b7597e0456add3845cf6bf7); */
-  background-color: #d43c33;
+  background-color: #fd999a;
   background-size: cover;
   height: 480rpx;
   display: flex;
@@ -45,7 +45,7 @@ page {
 }
 
 .nav-item .content i:nth-child(1) {
-  color: #d43c33;
+  color: #fd999a;
 }
 
 .nav-item .text + .iconfont {
