@@ -10,3 +10,5 @@
     </view>
   </view>
 </block>
+
+<view class="no-more-data" wx:if="{{musiclist.length === 0}}">暂无数据，先听歌曲吧</view>
