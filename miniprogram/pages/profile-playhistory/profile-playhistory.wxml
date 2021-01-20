@@ -1,1 +1,3 @@
 <musiclist musiclist="{{musiclist}}" />
+
+<view class="no-more-data" wx:if="{{musiclist.length === 0}}">暂无数据</view>

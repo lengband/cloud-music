@@ -33,10 +33,3 @@
 .playing .musiclist-name {
   color: #d43c33;
 }
-
-.no-more-data {
-  margin: 60rpx auto 20rpx;
-  font-size: 34rpx;
-  color: #888;
-  text-align: center;
-}
